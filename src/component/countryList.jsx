@@ -1,7 +1,26 @@
+import { CountryDetailInfo } from "./countryDetailInfo";
+
 export function CountryList({ country }) {
   const { name, flags, population, region, capital } = country;
   const listCapital = capital.join();
   const formattedPopulation = population.toLocaleString();
+  const renderList = [
+    {
+      id: 0,
+      title: "Population: ",
+      text: formattedPopulation,
+    },
+    {
+      id: 1,
+      title: "Region: ",
+      text: region,
+    },
+    {
+      id: 2,
+      title: "Capital: ",
+      text: listCapital,
+    },
+  ];
   return (
     <div>
       <div>
@@ -12,18 +31,15 @@ export function CountryList({ country }) {
         />
       </div>
       <h1>{name.common}</h1>
-      <div>
-        <h2>Population: </h2>
-        <span>{formattedPopulation}</span>
-      </div>
-      <div>
-        <h2>Region: </h2>
-        <span>{region}</span>
-      </div>
-      <div>
-        <h2>Capital: </h2>
-        <span>{listCapital}</span>
-      </div>
+      {renderList.map((item) => {
+        return (
+          <CountryDetailInfo
+            key={item.id}
+            title={item.title}
+            text={item.text}
+          />
+        );
+      })}
     </div>
   );
 }
