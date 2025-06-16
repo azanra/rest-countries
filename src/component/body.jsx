@@ -1,15 +1,43 @@
+import { CountryDetail } from "./countryDetail.jsx";
 import { CountryList } from "./countryList.jsx";
 import { SearchBar } from "./searchBar.jsx";
 import { SelectRegion } from "./selectRegion.jsx";
 
 export function Body() {
-  const country = [
+  const APIFILTER =
+    "name,population,region,subregion,capital,tld,currencies,languages,borders,flags";
+  const COUNTRY = [
     {
-      name: "Germany",
-      flag: "https://www.rjtravelagency.com/wp-content/uploads/2024/06/Germany-Flag.jpg",
-      population: 81770900,
-      region: "Europe",
+      flags: {
+        png: "https://flagcdn.com/w320/de.png",
+        svg: "https://flagcdn.com/de.svg",
+        alt: "The flag of Germany is composed of three equal horizontal bands of black, red and gold.",
+      },
+      name: {
+        common: "Germany",
+        official: "Federal Republic of Germany",
+        nativeName: {
+          deu: {
+            official: "Bundesrepublik Deutschland",
+            common: "Deutschland",
+          },
+        },
+      },
+      tld: [".de"],
+      currencies: {
+        EUR: {
+          name: "Euro",
+          symbol: "€",
+        },
+      },
       capital: ["Berlin"],
+      region: "Europe",
+      subregion: "Western Europe",
+      languages: {
+        deu: "German",
+      },
+      borders: ["AUT", "BEL", "CZE", "DNK", "FRA", "LUX", "NLD", "POL", "CHE"],
+      population: 83240525,
     },
   ];
   return (
@@ -18,11 +46,12 @@ export function Body() {
         <SearchBar />
         <SelectRegion />
         <ul>
-          {country.map((item, index) => {
+          {COUNTRY.map((item, index) => {
             return <CountryList key={index} country={item} />;
           })}
         </ul>
       </div>
+      <CountryDetail country={COUNTRY[0]} />
     </div>
   );
 }
