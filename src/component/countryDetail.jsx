@@ -27,6 +27,83 @@ export function CountryDetail({ country }) {
     return name.nativeName[item].common;
   });
 
+  const selectedBorder = [
+    {
+      flags: {
+        png: "https://flagcdn.com/w320/at.png",
+        svg: "https://flagcdn.com/at.svg",
+        alt: "The flag of Austria is composed of three equal horizontal bands of red, white and red.",
+      },
+      name: {
+        common: "Austria",
+        official: "Republic of Austria",
+        nativeName: {
+          bar: {
+            official: "Republik Österreich",
+            common: "Österreich",
+          },
+        },
+      },
+      tld: [".at"],
+      currencies: {
+        EUR: {
+          name: "Euro",
+          symbol: "€",
+        },
+      },
+      capital: ["Vienna"],
+      region: "Europe",
+      subregion: "Central Europe",
+      languages: {
+        deu: "German",
+      },
+      borders: ["CZE", "DEU", "HUN", "ITA", "LIE", "SVK", "SVN", "CHE"],
+      population: 8917205,
+    },
+    {
+      flags: {
+        png: "https://flagcdn.com/w320/be.png",
+        svg: "https://flagcdn.com/be.svg",
+        alt: "The flag of Belgium is composed of three equal vertical bands of black, yellow and red.",
+      },
+      name: {
+        common: "Belgium",
+        official: "Kingdom of Belgium",
+        nativeName: {
+          deu: {
+            official: "Königreich Belgien",
+            common: "Belgien",
+          },
+          fra: {
+            official: "Royaume de Belgique",
+            common: "Belgique",
+          },
+          nld: {
+            official: "Koninkrijk België",
+            common: "België",
+          },
+        },
+      },
+      tld: [".be"],
+      currencies: {
+        EUR: {
+          name: "Euro",
+          symbol: "€",
+        },
+      },
+      capital: ["Brussels"],
+      region: "Europe",
+      subregion: "Western Europe",
+      languages: {
+        deu: "German",
+        fra: "French",
+        nld: "Dutch",
+      },
+      borders: ["FRA", "DEU", "LUX", "NLD"],
+      population: 11555997,
+    },
+  ];
+
   return (
     <div>
       <div>
@@ -82,6 +159,16 @@ export function CountryDetail({ country }) {
                   text={Object.values(languages)}
                 />
               </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h2>Border Countries: </h2>
+              {selectedBorder.map((item) => {
+                return (
+                  <button key={item.name.common}>{item.name.common}</button>
+                );
+              })}
             </div>
           </div>
         </div>
