@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { CountryDetail } from "./countryDetail.jsx";
 import { CountryList } from "./countryList.jsx";
 import { SearchBar } from "./searchBar.jsx";
 import { SelectRegion } from "./selectRegion.jsx";
+import { useAllCountry } from "../hooks/useGetAllCountry.jsx";
 
 export function Body() {
-  const APIFILTER =
-    "name,population,region,subregion,capital,tld,currencies,languages,borders,flags";
+  const [showDetail, setShowDetail] = useState(false);
+
+  const { allCountry, loading, error } = useAllCountry();
+
   const COUNTRY = [
     {
       flags: {
@@ -40,18 +44,31 @@ export function Body() {
       population: 83240525,
     },
   ];
+
+  if (showDetail) {
+    return <CountryDetail country={COUNTRY[0]} />;
+  }
+
+  if (loading) {
+    return <p>Loading data...</p>;
+  }
+
+  if (error) {
+    return <p>Connection error!</p>;
+  }
+
   return (
     <div>
       <div>
         <SearchBar />
         <SelectRegion />
         <ul>
-          {COUNTRY.map((item, index) => {
-            return <CountryList key={index} country={item} />;
-          })}
+          {allCountry.length > 0 &&
+            allCountry.map((item, index) => {
+              return <CountryList key={index} country={item} />;
+            })}
         </ul>
       </div>
-      <CountryDetail country={COUNTRY[0]} />
     </div>
   );
 }
