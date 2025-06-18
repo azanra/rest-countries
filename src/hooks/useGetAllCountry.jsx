@@ -10,16 +10,24 @@ export function useAllCountry() {
   const URL = `https://restcountries.com/v3.1/all?fields=${FIELDS}`;
 
   useEffect(() => {
-    fetch(URL)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error");
-        }
-        return response.json();
-      })
-      .then((response) => setAllCountry(response))
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
+    if (!sessionStorage.getItem("allCountry")) {
+      fetch(URL)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error");
+          }
+          return response.json();
+        })
+        .then((response) => {
+          setAllCountry(response);
+          sessionStorage.setItem("allCountry", JSON.stringify(response));
+        })
+        .catch((error) => setError(error))
+        .finally(() => setLoading(false));
+    } else {
+      setAllCountry(JSON.parse(sessionStorage.getItem("allCountry")));
+      setLoading(false);
+    }
   }, []);
 
   return { allCountry, loading, error };
