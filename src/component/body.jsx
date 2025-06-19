@@ -7,8 +7,14 @@ import { useAllCountry } from "../hooks/useGetAllCountry.jsx";
 
 export function Body() {
   const [showDetail, setShowDetail] = useState(false);
-
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const { allCountry, loading, error } = useAllCountry();
+  console.log(selectedCountry);
+
+  const chooseCountry = (country) => {
+    setSelectedCountry(country);
+    setShowDetail(true);
+  };
 
   const COUNTRY = [
     {
@@ -46,7 +52,7 @@ export function Body() {
   ];
 
   if (showDetail) {
-    return <CountryDetail country={COUNTRY[0]} />;
+    return <CountryDetail country={selectedCountry} />;
   }
 
   if (loading) {
@@ -65,7 +71,13 @@ export function Body() {
         <ul>
           {allCountry.length > 0 &&
             allCountry.map((item, index) => {
-              return <CountryList key={index} country={item} />;
+              return (
+                <CountryList
+                  key={index}
+                  country={item}
+                  onClick={chooseCountry}
+                />
+              );
             })}
         </ul>
       </div>

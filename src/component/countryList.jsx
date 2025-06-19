@@ -1,6 +1,6 @@
 import { CountryDetailInfo } from "./countryDetailInfo";
 
-export function CountryList({ country }) {
+export function CountryList({ country, onClick }) {
   const { name, flags, population, region, capital } = country;
   const listCapital = capital.join();
   const formattedPopulation = population.toLocaleString();
@@ -22,7 +22,7 @@ export function CountryList({ country }) {
     },
   ];
   return (
-    <div>
+    <div onClick={() => onClick(country)}>
       <div>
         <img
           src={flags.png}
