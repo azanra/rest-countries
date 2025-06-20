@@ -16,40 +16,6 @@ export function Body() {
     setShowDetail(true);
   };
 
-  const COUNTRY = [
-    {
-      flags: {
-        png: "https://flagcdn.com/w320/de.png",
-        svg: "https://flagcdn.com/de.svg",
-        alt: "The flag of Germany is composed of three equal horizontal bands of black, red and gold.",
-      },
-      name: {
-        common: "Germany",
-        official: "Federal Republic of Germany",
-        nativeName: {
-          deu: {
-            official: "Bundesrepublik Deutschland",
-            common: "Deutschland",
-          },
-        },
-      },
-      tld: [".de"],
-      currencies: {
-        EUR: {
-          name: "Euro",
-          symbol: "€",
-        },
-      },
-      capital: ["Berlin"],
-      region: "Europe",
-      subregion: "Western Europe",
-      languages: {
-        deu: "German",
-      },
-      borders: ["AUT", "BEL", "CZE", "DNK", "FRA", "LUX", "NLD", "POL", "CHE"],
-      population: 83240525,
-    },
-  ];
 
   if (showDetail) {
     return (
