@@ -1,7 +1,7 @@
-import { getBorderCountry, useCodeCountry } from "../hooks/useCodeCountry.jsx";
+import BorderCountryBtn from "./borderCountryBtn.jsx";
 import { CountryDetailInfo } from "./countryDetailInfo.jsx";
 
-export function CountryDetail({ country }) {
+export function CountryDetail({ country, setCountryDetail }) {
   const {
     name,
     population,
@@ -29,10 +29,6 @@ export function CountryDetail({ country }) {
   const nativeNameCommon = nativeNameList.map((item) => {
     return name.nativeName[item].common;
   });
-
-  const borderCountry = getBorderCountry(borders);
-  console.log(borders);
-  console.log(borderCountry);
 
   return (
     <div>
@@ -94,14 +90,14 @@ export function CountryDetail({ country }) {
           <div>
             <div>
               <h2>Border Countries: </h2>
-              {borderCountry.map((item) => {
-                if (!item.loading) {
-                  return (
-                    <button key={item.country.name.common}>
-                      {item.country.name.common}
-                    </button>
-                  );
-                }
+              {borders.map((code, index) => {
+                return (
+                  <BorderCountryBtn
+                    borderCountry={code}
+                    key={index}
+                    setCountryDetail={setCountryDetail}
+                  />
+                );
               })}
             </div>
           </div>

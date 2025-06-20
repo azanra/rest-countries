@@ -52,7 +52,12 @@ export function Body() {
   ];
 
   if (showDetail) {
-    return <CountryDetail country={selectedCountry} />;
+    return (
+      <CountryDetail
+        setCountryDetail={setSelectedCountry}
+        country={selectedCountry}
+      />
+    );
   }
 
   if (loading) {
