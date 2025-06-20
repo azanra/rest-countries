@@ -30,6 +30,13 @@ export function CountryDetail({ country, setCountryDetail }) {
     return name.nativeName[item].common;
   });
 
+  const getLanguageList = (lang) => {
+    const language = Object.values(lang);
+    return language.join(", ");
+  };
+
+  const languageList = getLanguageList(languages);
+
   return (
     <div>
       <div>
@@ -61,7 +68,7 @@ export function CountryDetail({ country, setCountryDetail }) {
               <div className="left">
                 <CountryDetailInfo
                   title="Native Name: "
-                  text={nativeNameCommon.join()}
+                  text={nativeNameCommon.join(", ")}
                 />
                 <CountryDetailInfo
                   title="Population: "
@@ -74,16 +81,13 @@ export function CountryDetail({ country, setCountryDetail }) {
               <div className="right">
                 <CountryDetailInfo
                   title="Top Level Domain: "
-                  text={tld.join()}
+                  text={tld.join(", ")}
                 />
                 <CountryDetailInfo
                   title="Currencies: "
                   text={currenciesList.join()}
                 />
-                <CountryDetailInfo
-                  title="Languages: "
-                  text={Object.values(languages)}
-                />
+                <CountryDetailInfo title="Languages: " text={languageList} />
               </div>
             </div>
           </div>
