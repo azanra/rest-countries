@@ -24,3 +24,12 @@ export function useCodeCountry(code) {
 
   return { country, loading, error };
 }
+
+export function getBorderCountry(border) {
+  const borderCountry = border.map((item) => {
+    const { country, loading, error } = useCodeCountry(item);
+    return { country, loading, error };
+  });
+
+  return borderCountry;
+}
