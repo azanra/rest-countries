@@ -9,6 +9,7 @@ export function Body() {
   const [showDetail, setShowDetail] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const { allCountry, loading, error } = useAllCountry();
+  const [searchKeyword, setSearchKeyword] = useState("");
   console.log(selectedCountry);
 
   const chooseCountry = (country) => {
@@ -37,7 +38,10 @@ export function Body() {
   return (
     <div>
       <div>
-        <SearchBar />
+        <SearchBar
+          searhKeyword={searchKeyword}
+          setSearchKeyword={setSearchKeyword}
+        />
         <SelectRegion />
         <ul>
           {allCountry.length > 0 &&
