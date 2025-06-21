@@ -16,12 +16,12 @@ export function Body() {
     setShowDetail(true);
   };
 
-
   if (showDetail) {
     return (
       <CountryDetail
         setCountryDetail={setSelectedCountry}
         country={selectedCountry}
+        setShowDetail={setShowDetail}
       />
     );
   }

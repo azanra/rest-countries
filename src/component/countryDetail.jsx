@@ -1,7 +1,7 @@
 import BorderCountryBtn from "./borderCountryBtn.jsx";
 import { CountryDetailInfo } from "./countryDetailInfo.jsx";
 
-export function CountryDetail({ country, setCountryDetail }) {
+export function CountryDetail({ country, setCountryDetail, setShowDetail }) {
   const {
     name,
     population,
@@ -52,7 +52,7 @@ export function CountryDetail({ country, setCountryDetail }) {
               data-name="4-Arrow Left"
             />
           </svg>
-          <button>Back</button>
+          <button onClick={() => setShowDetail(false)}>Back</button>
         </div>
       </div>
       <div>
