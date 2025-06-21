@@ -4,12 +4,20 @@ import { CountryList } from "./countryList.jsx";
 import { SearchBar } from "./searchBar.jsx";
 import { SelectRegion } from "./selectRegion.jsx";
 import { useAllCountry } from "../hooks/useGetAllCountry.jsx";
+import { useSearchCounty } from "../hooks/useSearchCountry.jsx";
 
 export function Body() {
   const [showDetail, setShowDetail] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const { allCountry, loading, error } = useAllCountry();
   const [searchKeyword, setSearchKeyword] = useState("");
+  const {
+    country: searchCountry,
+    loading: searchLoading,
+    error: searchError,
+  } = useSearchCounty(searchKeyword);
+
+  console.log(searchCountry);
   console.log(selectedCountry);
 
   const chooseCountry = (country) => {
