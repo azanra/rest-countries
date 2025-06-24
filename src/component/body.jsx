@@ -42,10 +42,7 @@ export function Body() {
       />
     );
   }
-
-  if (loading) {
-    return <p>Loading data...</p>;
-  }
+  const isLoading = loading || (searchKeyword.length > 0 && searchLoading);
 
   if (error || searchError) {
     return <p>Connection error!</p>;
@@ -60,6 +57,10 @@ export function Body() {
         />
         {countryIsNotFound && <p>Unable to find the country</p>}
         <SelectRegion />
+      </div>
+      {isLoading ? (
+        <p>Loading the data...</p>
+      ) : (
         <ul>
           {!searchLoading &&
             !countryIsNotFound &&
@@ -78,7 +79,7 @@ export function Body() {
             );
           })}
         </ul>
-      </div>
+      )}
     </div>
   );
 }
