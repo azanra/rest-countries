@@ -14,7 +14,7 @@ export function useSearchCounty(searchKeyword) {
       fetch(URL)
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Error");
+            throw new Error(`Error Response: ${response.status}`);
           }
           return response.json();
         })
