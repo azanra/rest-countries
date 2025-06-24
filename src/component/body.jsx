@@ -17,8 +17,16 @@ export function Body() {
     error: searchError,
   } = useSearchCounty(searchKeyword);
 
-  console.log(searchCountry);
-  console.log(selectedCountry);
+  const countryIsNotFound =
+    !searchLoading &&
+    searchError === null &&
+    Object.keys(searchCountry).length === 0
+      ? true
+      : false;
+
+  console.log("search country", searchCountry);
+  console.log("selected country", selectedCountry);
+  console.log("search keyword", searchKeyword);
 
   const chooseCountry = (country) => {
     setSelectedCountry(country);
@@ -39,7 +47,7 @@ export function Body() {
     return <p>Loading data...</p>;
   }
 
-  if (error) {
+  if (error || searchError) {
     return <p>Connection error!</p>;
   }
 
@@ -50,10 +58,12 @@ export function Body() {
           searhKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
         />
+        {countryIsNotFound && <p>Unable to find the country</p>}
         <SelectRegion />
         <ul>
-          {allCountry.length > 0 &&
-            allCountry.map((item, index) => {
+          {!searchLoading &&
+            !countryIsNotFound &&
+            searchCountry.map((item, index) => {
               return (
                 <CountryList
                   key={index}
@@ -62,6 +72,11 @@ export function Body() {
                 />
               );
             })}
+          {allCountry.map((item, index) => {
+            return (
+              <CountryList key={index} country={item} onClick={chooseCountry} />
+            );
+          })}
         </ul>
       </div>
     </div>
