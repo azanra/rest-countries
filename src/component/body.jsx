@@ -68,7 +68,7 @@ export function Body() {
     <div>
       <div>
         <SearchBar
-          searhKeyword={searchKeyword}
+          searchKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
         />
         {!searchIsSuccess && searchKeyword.length > 0 && (
