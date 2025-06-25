@@ -17,12 +17,12 @@ export function Body() {
     error: searchError,
   } = useSearchCounty(searchKeyword);
 
-  const countryIsNotFound =
+  const searchIsSuccess =
     !searchLoading &&
-    searchError === null &&
-    Object.keys(searchCountry).length === 0
-      ? true
-      : false;
+    searchError === undefined &&
+    Object.keys(searchCountry).length !== 0;
+
+  const allIsSuccess = !loading && error === null && allCountry.length > 0;
 
   console.log("search country", searchCountry);
   console.log("selected country", selectedCountry);
@@ -44,6 +44,22 @@ export function Body() {
   }
   const isLoading = loading || (searchKeyword.length > 0 && searchLoading);
 
+  const renderCountry = () => {
+    if (searchIsSuccess) {
+      return searchCountry;
+    } else if (allIsSuccess) {
+      return allCountry;
+    } else {
+      return [];
+    }
+  };
+
+  if (isLoading) {
+    return <p>Fetching data...</p>;
+  }
+
+  const renderedCountry = renderCountry();
+
   if (error || searchError) {
     return <p>Connection error!</p>;
   }
@@ -55,31 +71,18 @@ export function Body() {
           searhKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
         />
-        {countryIsNotFound && <p>Unable to find the country</p>}
+        {!searchIsSuccess && searchKeyword.length > 0 && (
+          <p>Unable to find the country</p>
+        )}
         <SelectRegion />
       </div>
-      {isLoading ? (
-        <p>Loading the data...</p>
-      ) : (
-        <ul>
-          {!searchLoading &&
-            !countryIsNotFound &&
-            searchCountry.map((item, index) => {
-              return (
-                <CountryList
-                  key={index}
-                  country={item}
-                  onClick={chooseCountry}
-                />
-              );
-            })}
-          {allCountry.map((item, index) => {
-            return (
-              <CountryList key={index} country={item} onClick={chooseCountry} />
-            );
-          })}
-        </ul>
-      )}
+      <ul>
+        {renderedCountry.map((item, index) => {
+          return (
+            <CountryList key={index} country={item} onClick={chooseCountry} />
+          );
+        })}
+      </ul>
     </div>
   );
 }
