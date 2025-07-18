@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { APIFILTER } from "../enum/enum.js";
 
-export function useAllCountry() {
-  const [allCountry, setAllCountry] = useState([]);
+export function useGetAllCountry() {
+  const [country, setCountry] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,16 +19,16 @@ export function useAllCountry() {
           return response.json();
         })
         .then((response) => {
-          setAllCountry(response);
+          setCountry(response);
           sessionStorage.setItem("allCountry", JSON.stringify(response));
         })
         .catch((error) => setError(error))
         .finally(() => setLoading(false));
     } else {
-      setAllCountry(JSON.parse(sessionStorage.getItem("allCountry")));
+      setCountry(JSON.parse(sessionStorage.getItem("allCountry")));
       setLoading(false);
     }
   }, []);
 
-  return { allCountry, loading, error };
+  return { country, loading, error };
 }
