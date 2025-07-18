@@ -1,16 +1,4 @@
 export function SearchBar({ searchKeyword, setSearchKeyword }) {
-  const debounce = (fn, delay) => {
-    let timeoutId;
-    return function (args) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        fn(args);
-        console.log(args);
-      }, delay);
-    };
-  };
-
-  const searchDebounce = debounce(setSearchKeyword, 500);
 
   return (
     <div>
@@ -28,7 +16,7 @@ export function SearchBar({ searchKeyword, setSearchKeyword }) {
         type="text"
         placeholder="Search for a country..."
         value={searchKeyword}
-        onChange={(e) => searchDebounce(e.target.value)}
+        onChange={(e) => setSearchKeyword(e.target.value)}
       />
     </div>
   );
