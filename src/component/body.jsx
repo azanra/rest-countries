@@ -3,30 +3,29 @@ import { CountryDetail } from "./countryDetail.jsx";
 import { CountryList } from "./countryList.jsx";
 import { SearchBar } from "./searchBar.jsx";
 import { SelectRegion } from "./selectRegion.jsx";
-import { useAllCountry } from "../hooks/useGetAllCountry.jsx";
-import { useSearchCounty } from "../hooks/useSearchCountry.jsx";
+import { useGetAllCountry } from "../hooks/useGetAllCountry.jsx";
+import { SearchCountryList } from "./searchCountryList.jsx";
 
 export function Body() {
   const [showDetail, setShowDetail] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const { allCountry, loading, error } = useAllCountry();
   const [searchKeyword, setSearchKeyword] = useState("");
+
   const {
-    country: searchCountry,
-    loading: searchLoading,
-    error: searchError,
-  } = useSearchCounty(searchKeyword);
+    country: allCountry,
+    loading: allLoading,
+    error: allError,
+  } = useGetAllCountry();
 
-  const searchIsSuccess =
-    !searchLoading &&
-    searchError === undefined &&
-    Object.keys(searchCountry).length !== 0;
+  const chooseRenderedCountry = () => {
+    if (searchKeyword.length > 0) {
+      return "search";
+    } else {
+      return "all";
+    }
+  };
 
-  const allIsSuccess = !loading && error === null && allCountry.length > 0;
-
-  console.log("search country", searchCountry);
-  console.log("selected country", selectedCountry);
-  console.log("search keyword", searchKeyword);
+  const renderedCountry = chooseRenderedCountry();
 
   const chooseCountry = (country) => {
     setSelectedCountry(country);
@@ -42,26 +41,13 @@ export function Body() {
       />
     );
   }
-  const isLoading = loading || (searchKeyword.length > 0 && searchLoading);
 
-  const renderCountry = () => {
-    if (searchIsSuccess) {
-      return searchCountry;
-    } else if (allIsSuccess) {
-      return allCountry;
-    } else {
-      return [];
-    }
-  };
-
-  if (isLoading) {
-    return <p>Fetching data...</p>;
+  if (allLoading) {
+    return <p>Loading the data...</p>;
   }
 
-  const renderedCountry = renderCountry();
-
-  if (error || searchError) {
-    return <p>Connection error!</p>;
+  if (allError) {
+    return <p>Error happened when fetching the data!</p>;
   }
 
   return (
@@ -71,17 +57,21 @@ export function Body() {
           searchKeyword={searchKeyword}
           setSearchKeyword={setSearchKeyword}
         />
-        {!searchIsSuccess && searchKeyword.length > 0 && (
-          <p>Unable to find the country</p>
-        )}
         <SelectRegion />
       </div>
       <ul>
-        {renderedCountry.map((item, index) => {
-          return (
-            <CountryList key={index} country={item} onClick={chooseCountry} />
-          );
-        })}
+        {renderedCountry === "search" && (
+          <SearchCountryList
+            searchKeyword={searchKeyword}
+            chooseCountry={chooseCountry}
+          />
+        )}
+        {renderedCountry === "all" &&
+          allCountry.map((item, index) => {
+            return (
+              <CountryList key={index} country={item} onClick={chooseCountry} />
+            );
+          })}
       </ul>
     </div>
   );

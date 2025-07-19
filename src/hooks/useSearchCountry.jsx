@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { APIFILTER } from "../enum/enum.js";
 
-export function useSearchCounty(searchKeyword) {
+export function useGetSearchCountry(searchKeyword) {
   const [country, setCountry] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
