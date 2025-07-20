@@ -8,12 +8,20 @@ export function SearchCountryList({ searchKeyword, chooseCountry }) {
     error: searchError,
   } = useGetSearchCountry(searchKeyword);
 
+  const isEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
+
   if (searchKeyword.length > 0 && searchLoading) {
     return <p>Loading the data...</p>;
   }
 
   if (searchError) {
-    <p>Error happened when fetching the data!</p>;
+    return <p>Error happened when fetching the data!</p>;
+  }
+
+  if (isEmpty(searchCountry) && !searchLoading && searchError === null) {
+    return <p>Country not found!</p>;
   }
   return (
     <>
