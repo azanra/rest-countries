@@ -1,4 +1,14 @@
-export function SearchBar({ searchKeyword, setSearchKeyword }) {
+import debounce from "lodash.debounce";
+import { useMemo } from "react";
+
+export function SearchBar({ setSearchKeyword }) {
+  const handleChange = (e) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const debouncedKeyword = useMemo(() => {
+    return debounce(handleChange, 1000);
+  }, []);
 
   return (
     <div>
@@ -15,8 +25,7 @@ export function SearchBar({ searchKeyword, setSearchKeyword }) {
       <input
         type="text"
         placeholder="Search for a country..."
-        value={searchKeyword}
-        onChange={(e) => setSearchKeyword(e.target.value)}
+        onChange={debouncedKeyword}
       />
     </div>
   );

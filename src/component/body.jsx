@@ -53,10 +53,7 @@ export function Body() {
   return (
     <div>
       <div>
-        <SearchBar
-          searchKeyword={searchKeyword}
-          setSearchKeyword={setSearchKeyword}
-        />
+        <SearchBar setSearchKeyword={setSearchKeyword} />
         <SelectRegion />
       </div>
       <ul>
