@@ -1,11 +1,11 @@
-export function Header() {
+export function Header({ isDark, setIsDark }) {
   return (
     <div>
       <div>
         <h1>Where in the world?</h1>
       </div>
       <div>
-        <button>
+        <button onClick={() => setIsDark(!isDark)}>
           <svg
             enableBackground="new 0 0 512 512"
             height="25px"
