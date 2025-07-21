@@ -22,7 +22,7 @@ export function useGetAllCountry() {
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [URL]);
 
   return { country, loading, error };
 }
