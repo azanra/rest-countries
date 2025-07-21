@@ -5,11 +5,13 @@ import { SearchBar } from "./searchBar.jsx";
 import { SelectRegion } from "./selectRegion.jsx";
 import { useGetAllCountry } from "../hooks/useGetAllCountry.jsx";
 import { SearchCountryList } from "./searchCountryList.jsx";
+import { RegionCountryList } from "./regionCountryList.jsx";
 
 export function Body() {
   const [showDetail, setShowDetail] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [region, setRegion] = useState("");
 
   const {
     country: allCountry,
@@ -20,6 +22,8 @@ export function Body() {
   const chooseRenderedCountry = () => {
     if (searchKeyword.length > 0) {
       return "search";
+    } else if (region.length > 0) {
+      return "region";
     } else {
       return "all";
     }
@@ -54,7 +58,7 @@ export function Body() {
     <div>
       <div>
         <SearchBar setSearchKeyword={setSearchKeyword} />
-        <SelectRegion />
+        <SelectRegion setRegion={setRegion} />
       </div>
       <ul>
         {renderedCountry === "search" && (
@@ -62,6 +66,9 @@ export function Body() {
             searchKeyword={searchKeyword}
             chooseCountry={chooseCountry}
           />
+        )}
+        {renderedCountry === "region" && (
+          <RegionCountryList region={region} chooseCountry={chooseCountry} />
         )}
         {renderedCountry === "all" &&
           allCountry.map((item, index) => {
