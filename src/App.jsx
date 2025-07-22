@@ -7,12 +7,16 @@ import { IsDarkContext } from "./context/themeContext.js";
 function App() {
   const [isDark, setIsDark] = useState(true);
   return (
-    <>
-      <Header setIsDark={setIsDark} />
+    <div
+      className={`${
+        isDark ? "bg-(--Dark-Mode-Background)" : "bg-(--Light-Mode-Background)"
+      }`}
+    >
+      <Header setIsDark={setIsDark} isDark={isDark} />
       <IsDarkContext value={isDark}>
         <Body />
       </IsDarkContext>
-    </>
+    </div>
   );
 }
 
