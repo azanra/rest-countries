@@ -56,7 +56,7 @@ export function Body() {
 
   return (
     <div>
-      <div>
+      <div className="flex justify-between px-16 py-7">
         <SearchBar setSearchKeyword={setSearchKeyword} />
         <SelectRegion setRegion={setRegion} />
       </div>
