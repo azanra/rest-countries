@@ -4,7 +4,7 @@ export function Header({ isDark, setIsDark }) {
       className={`${
         isDark
           ? "bg-(--Dark-Mode-Elements) shadow-lg"
-          : "bg-(--Light-Mode-Background) shadow-sm "
+          : "bg-(--Light-Mode-Background) shadow-sm"
       } flex justify-between px-16 py-8`}
     >
       <h1
