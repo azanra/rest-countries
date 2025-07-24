@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { CountryDetailInfo } from "./countryDetailInfo";
+import { IsDarkContext } from "../context/themeContext";
 
 export function CountryList({ country, onClick }) {
+  const isDark = useContext(IsDarkContext);
   const { name, flags, population, region, capital } = country;
   const listCapital = capital.join();
   const formattedPopulation = population.toLocaleString();
@@ -22,24 +25,37 @@ export function CountryList({ country, onClick }) {
     },
   ];
   return (
-    <div onClick={() => onClick(country)}>
-      <div>
-        <img
-          src={flags.png}
-          alt={`${name} Flag`}
-          style={{ height: "75px", width: "150px" }}
-        />
+    <div
+      onClick={() => onClick(country)}
+      className={`${
+        isDark
+          ? "bg-(--Dark-Mode-Elements) shadow-lg"
+          : "bg-(--Light-Mode-Background) shadow-sm"
+      } rounded-md`}
+    >
+      <img
+        src={flags.png}
+        alt={`${name} Flag`}
+        className="w-full h-[50%] rounded-md"
+      />
+      <div
+        className={`pb-8 pt-4 px-6 ${
+          isDark
+            ? "text-(--Dark-Mode-Text-Light-Mode)"
+            : "text-(--Light-Mode-Text)"
+        }`}
+      >
+        <h1 className="my-4 font-bold text-xl">{name.common}</h1>
+        {renderList.map((item) => {
+          return (
+            <CountryDetailInfo
+              key={item.id}
+              title={item.title}
+              text={item.text}
+            />
+          );
+        })}
       </div>
-      <h1>{name.common}</h1>
-      {renderList.map((item) => {
-        return (
-          <CountryDetailInfo
-            key={item.id}
-            title={item.title}
-            text={item.text}
-          />
-        );
-      })}
     </div>
   );
 }

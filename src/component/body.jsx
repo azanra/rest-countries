@@ -60,7 +60,7 @@ export function Body() {
         <SearchBar setSearchKeyword={setSearchKeyword} />
         <SelectRegion setRegion={setRegion} />
       </div>
-      <ul>
+      <div className="grid grid-cols-4 px-16 py-8 gap-16">
         {renderedCountry === "search" && (
           <SearchCountryList
             searchKeyword={searchKeyword}
@@ -76,7 +76,7 @@ export function Body() {
               <CountryList key={index} country={item} onClick={chooseCountry} />
             );
           })}
-      </ul>
+      </div>
     </div>
   );
 }
