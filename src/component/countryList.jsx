@@ -5,7 +5,7 @@ import { IsDarkContext } from "../context/themeContext";
 export function CountryList({ country, onClick }) {
   const isDark = useContext(IsDarkContext);
   const { name, flags, population, region, capital } = country;
-  const listCapital = capital.join();
+  const listCapital = capital.join(", ");
   const formattedPopulation = population.toLocaleString();
   const renderList = [
     {
