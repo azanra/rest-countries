@@ -6,6 +6,7 @@ import { SelectRegion } from "./selectRegion.jsx";
 import { useGetAllCountry } from "../hooks/useGetAllCountry.jsx";
 import { SearchCountryList } from "./searchCountryList.jsx";
 import { RegionCountryList } from "./regionCountryList.jsx";
+import FetchState from "./fetchState.jsx";
 
 export function Body() {
   const [showDetail, setShowDetail] = useState(false);
@@ -47,11 +48,19 @@ export function Body() {
   }
 
   if (allLoading) {
-    return <p>Loading the data...</p>;
+    return (
+      <div className="px-16 py-7">
+        <FetchState text={"Loading the data..."} />
+      </div>
+    );
   }
 
   if (allError) {
-    return <p>Error happened when fetching the data!</p>;
+    return (
+      <div className="px-16 py-7">
+        <FetchState text={"Error happened when fetching the data!"} />
+      </div>
+    );
   }
 
   return (

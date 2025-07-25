@@ -1,5 +1,6 @@
 import { useGetSearchCountry } from "../hooks/useSearchCountry";
 import { CountryList } from "./countryList";
+import FetchState from "./fetchState";
 
 export function SearchCountryList({ searchKeyword, chooseCountry }) {
   const {
@@ -13,15 +14,15 @@ export function SearchCountryList({ searchKeyword, chooseCountry }) {
   };
 
   if (searchKeyword.length > 0 && searchLoading) {
-    return <p>Loading the data...</p>;
+    return <FetchState text={"Loading the data..."} />;
   }
 
   if (searchError) {
-    return <p>Error happened when fetching the data!</p>;
+    return <FetchState text={"Error happened when fetching the data!"} />;
   }
 
   if (isEmpty(searchCountry) && !searchLoading && searchError === null) {
-    return <p>Country not found!</p>;
+    return <FetchState text={"Country is not found!"} />;
   }
   return (
     <>

@@ -1,5 +1,6 @@
 import { useFilterCountry } from "../hooks/useFilterCountry";
 import { CountryList } from "./countryList";
+import FetchState from "./fetchState";
 
 export function RegionCountryList({ region, chooseCountry }) {
   const {
@@ -9,11 +10,11 @@ export function RegionCountryList({ region, chooseCountry }) {
   } = useFilterCountry(region);
 
   if (region.length > 0 && regionLoading) {
-    return <p>Loading the data...</p>;
+    return <FetchState text={"Loading the data..."} />;
   }
 
   if (regionError) {
-    return <p>Error happened when fetching the data...</p>;
+    return <FetchState text={"Error happened when fetching the data!"} />;
   }
 
   return (

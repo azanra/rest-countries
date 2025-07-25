@@ -42,7 +42,7 @@ export function CountryDetail({ country, setCountryDetail, setShowDetail }) {
   const languageList = getLanguageList(languages);
 
   return (
-    <div className="h-screen">
+    <div>
       <div className="px-16 py-16">
         <button
           onClick={() => setShowDetail(false)}
