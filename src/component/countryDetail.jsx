@@ -71,55 +71,57 @@ export function CountryDetail({ country, setCountryDetail, setShowDetail }) {
           <p className="text-inherit">Back</p>
         </button>
       </div>
-      <div>
-        <div>
-          <img src={flags.png} alt={`${name} Flag`} />
+      <div className="flex px-16 gap-32">
+        <div className="flex-1">
+          <img src={flags.png} alt={`${name} Flag`} className="w-[60%]" />
         </div>
-        <div>
+        <div
+          className={`flex-1 ${
+            isDark
+              ? "text-(--Dark-Mode-Text-Light-Mode)"
+              : "text-(--Light-Mode-Text)"
+          }`}
+        >
           <div>
-            <h2>{name.common}</h2>
+            <h2 className="font-bold text-3xl my-12">{name.common}</h2>
           </div>
-          <div>
+          <div className="flex gap-32">
             <div>
-              <div className="left">
-                <CountryDetailInfo
-                  title="Native Name: "
-                  text={nativeNameCommon.join(", ")}
-                />
-                <CountryDetailInfo
-                  title="Population: "
-                  text={population.toLocaleString()}
-                />
-                <CountryDetailInfo title="Region: " text={region} />
-                <CountryDetailInfo title="Sub Region: " text={subregion} />
-                <CountryDetailInfo title="Capital: " text={capital.join()} />
-              </div>
-              <div className="right">
-                <CountryDetailInfo
-                  title="Top Level Domain: "
-                  text={tld.join(", ")}
-                />
-                <CountryDetailInfo
-                  title="Currencies: "
-                  text={currenciesList.join()}
-                />
-                <CountryDetailInfo title="Languages: " text={languageList} />
-              </div>
+              <CountryDetailInfo
+                title="Native Name: "
+                text={nativeNameCommon.join(", ")}
+              />
+              <CountryDetailInfo
+                title="Population: "
+                text={population.toLocaleString()}
+              />
+              <CountryDetailInfo title="Region: " text={region} />
+              <CountryDetailInfo title="Sub Region: " text={subregion} />
+              <CountryDetailInfo title="Capital: " text={capital.join()} />
+            </div>
+            <div>
+              <CountryDetailInfo
+                title="Top Level Domain: "
+                text={tld.join(", ")}
+              />
+              <CountryDetailInfo
+                title="Currencies: "
+                text={currenciesList.join()}
+              />
+              <CountryDetailInfo title="Languages: " text={languageList} />
             </div>
           </div>
-          <div>
-            <div>
-              <h2>Border Countries: </h2>
-              {borders.map((code, index) => {
-                return (
-                  <BorderCountryBtn
-                    borderCountry={code}
-                    key={index}
-                    setCountryDetail={setCountryDetail}
-                  />
-                );
-              })}
-            </div>
+          <div className="flex gap-4 mt-16 items-center">
+            <h2 className="font-bold">Border Countries: </h2>
+            {borders.map((code, index) => {
+              return (
+                <BorderCountryBtn
+                  borderCountry={code}
+                  key={index}
+                  setCountryDetail={setCountryDetail}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
