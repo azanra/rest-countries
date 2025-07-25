@@ -12,7 +12,7 @@ export function Header({ isDark, setIsDark }) {
           isDark
             ? "text-(--Dark-Mode-Text-Light-Mode)"
             : "text-(--Light-Mode-Text)"
-        } font-bold`}
+        } font-bold text-xl`}
       >
         Where in the world?
       </h1>
